@@ -1,0 +1,47 @@
+.report{
+    padding-top:20px ;
+}
+.personalized-report-head{
+    font-family: BaskervilleOldFace;
+    font-size: 36px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1.08px;
+    text-align: left;
+    color: #293750;
+}
+.after-head{
+    margin: 1px 49px 22px 160px;
+    font-family: OpenSans;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    text-align: left;
+    color: #293750;
+}
+.before-head{
+    
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+
+letter-spacing: 0.03em;
+
+color: #293750;
+}
+
+.all-filters{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    justify-content: space-between;
+    grid-gap: 20px;
+}

@@ -1,0 +1,47 @@
+.generate-btn{
+    flex-grow: 0;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+    margin: 30px 23px 59px 33px;
+    color: white;
+    border: none;
+    padding: 10px 85px;
+    border-radius: 9px;
+    background-color: #0263c7;
+  }
+.accordion1,.accordion2 {
+    max-width: 600px;
+  }
+  
+  .accordion-title1,.accordion-title2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .accordion-content2,.accordion-title2 p{
+    font-weight: 400;
+font-size: 19px;
+line-height: 19px;
+
+letter-spacing: 0.03em;
+
+color: #293750;
+    padding: 10px 32px; 
+  }
+  .accordion-title1,
+  .accordion-content1 ,.accordion-title2 div{
+    font-family: 'Baskerville Old Face';
+font-style: normal;
+font-weight: 400;
+font-size: 19px;
+line-height: 19px;
+
+letter-spacing: 0.03em;
+
+color: #293750;
+    padding: 10px 32px;  }
+  
