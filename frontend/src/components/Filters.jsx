@@ -2,15 +2,32 @@ import React from 'react'
 import './Filters.css'
 import vector from '../assets/vector.svg'
 import { useState } from 'react'
+import { useContext } from 'react'
+import { Store } from '../Store'
 const Filters = () => {
-
   const [country,setCountry]=useState(false)
   const [industry,setIndustry]=useState(false)
   const [city,setCity]=useState(false)
   const [market,setMarket]=useState(false)
   const [competitors,setCompetitors]=useState(false)
   const [painpoints,setPainpoints]=useState(false)
-const industry_data=['Food & Beverages','ITES','Manufacturing', 'Digital Marketing','Management Consulting']
+const industry_data=[
+{name:'Food & Beverages'},
+{name:'ITES'},
+{name:'Manufacturing'},
+{name: 'Digital Marketing'},
+{name:'Management Consulting'}
+]
+const {state,dispatch:ctxDispatch}=useContext(Store)
+
+
+const handleIndustry=(e)=>{
+   const {name,checked}=e.target
+   if(checked)
+   {
+     ctxDispatch({type:'ADD_INDUSTRY',payload:name})
+   }
+}
 
   return (
     <div className='sidebar'>
@@ -59,8 +76,12 @@ const industry_data=['Food & Beverages','ITES','Manufacturing', 'Digital Marketi
             industry_data&&industry_data.map((ind)=>{
               return(
                  <>
-                 <input type='checkbox' name="industry" value={ind}/>
-                 <label>{ind}</label> <br/>
+                 <div class="form-check">
+                 <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" />
+                 <label class="form-check-label" for="flexCheckChecked" onChange={handleIndustry}>
+                   {ind.name}
+                 </label>
+               </div>
                 
                  </>
               )

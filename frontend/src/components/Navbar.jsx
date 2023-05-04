@@ -2,7 +2,14 @@ import React from 'react'
 import logo from '../assets/logo.svg'
 import { Link } from 'react-router-dom'
 import wrong from '../assets/wrong.svg'
+import { useState } from 'react'
+import Login from './Login'
+import {Modal,ModalBody,ModalHeader} from "reactstrap"
+import Otp from './Otp'
 const Navbar = (props) => {
+
+  const [openModel,setOpenModel]=useState(false)
+
   return (
     <>
     <div className='header'>
@@ -41,7 +48,9 @@ const Navbar = (props) => {
           <div className={props.contact?"active":""} ></div>
         </li>
         <li className="nav-item">
-          <button className="nav-link login-btn">LOGIN</button>
+          <button className="nav-link login-btn"
+          onClick={()=>setOpenModel(true)}
+          >LOGIN</button>
         </li>
       </ul>
     </div>
@@ -59,6 +68,21 @@ const Navbar = (props) => {
    </div>
    
     </div>
+    <Modal
+    size='lg'
+    isOpen={openModel}
+    toggle={()=>setOpenModel(!openModel)}
+    >
+    <ModalHeader 
+    toggle={()=>setOpenModel(!openModel)}
+    >
+    </ModalHeader>
+    <ModalBody>
+
+    <Login/>
+    </ModalBody>
+    </Modal>
+     
     </>
   )
 }

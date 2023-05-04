@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Filters from './Filters'
 import PriceCard from './PriceCard'
 import './Reports.css'
@@ -7,8 +7,14 @@ import Navbar from './Navbar'
 import { useState } from 'react'
 import HeadingAfter from './HeadingAfter'
 import HeadingBefore from './HeadingBefore'
+import { Store } from '../Store'
 const Reports = () => {
-  const [generate,setGenerate]=useState(true)
+  const {state,dispatch:ctxDispatch}=useContext(Store)
+  const {industry_items}=state
+  const [generate,setGenerate]=useState(false)
+  useEffect(()=>{
+    console.log(industry_items)
+  },[])
   return (
     <>
     <Navbar reports/>
