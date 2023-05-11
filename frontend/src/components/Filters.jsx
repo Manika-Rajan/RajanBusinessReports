@@ -1,16 +1,10 @@
 import React from 'react'
 import './Filters.css'
-import vector from '../assets/vector.svg'
-import { useState } from 'react'
-import { useContext } from 'react'
-import { Store } from '../Store'
-const Filters = () => {
-  const [country,setCountry]=useState(false)
-  const [industry,setIndustry]=useState(false)
-  const [city,setCity]=useState(false)
-  const [market,setMarket]=useState(false)
-  const [competitors,setCompetitors]=useState(false)
-  const [painpoints,setPainpoints]=useState(false)
+import './Reports.css'
+const Filters = ({updateIndustry,updateMarket,updateCity,updateCompetitors,updatePain,country,setCountry,
+industry,setIndustry,setCity,city,competitors,setCompetitors,market,setMarket,painpoints,setPainpoints,handleClear,select_industry,select_city,select_market,select_competitors,select_pain
+}) => {
+  
 const industry_data=[
 {name:'Food & Beverages'},
 {name:'ITES'},
@@ -18,24 +12,67 @@ const industry_data=[
 {name: 'Digital Marketing'},
 {name:'Management Consulting'}
 ]
-const {state,dispatch:ctxDispatch}=useContext(Store)
+const city_data=[
+  {name:'Hyderabad'},
+  {name:'Delhi'},
+  {name:'Mumbai'},
+  {name:'Kolkata'},
+]
+const competitors_data=[
+  {name:' India wide '},
+  {name:' Andhra Pradesh'},
+  {name:' Telangana'},
+  {name:' Karnataka'},
+  {name:'  West Bengal'},
+  {name:' Delhi  '},
+  {name:' Maharashtra  '},
+]
+const market_data=[
+  {name:'  less than 5  '},
+  {name:' 5 to 15  '},
+  {name:' 15 to 25  '},
+  {name:' 25 to 40  '},
+  {name:' All of the Above  '},
+]
 
+const pain_data=[
+  {name:'  Availability of Product  '},
+  {name:' Price of Product  '},
+  {name:' Quality of Products in Market  '},
+  {name:' Supply of Product not Adequate  '},
+
+]
 
 const handleIndustry=(e)=>{
-   const {name,checked}=e.target
-   if(checked)
-   {
-     ctxDispatch({type:'ADD_INDUSTRY',payload:name})
-   }
+   const {value,checked}=e.target
+   updateIndustry(value,checked)    
 }
+const handleCity=(e)=>{
+  const {value,checked}=e.target
+  updateCity(value,checked)
+}
+const handleCompetitors=(e)=>{
+  const {value,checked}=e.target
+  updateCompetitors(value,checked)
+}
+const handleMarket=(e)=>{
+  const {value,checked}=e.target
+  updateMarket(value,checked)
+}
+const handlePain=(e)=>{
+  const {value,checked}=e.target
+  updatePain(value,checked)
 
+}
   return (
     <div className='sidebar'>
        <div className="accordion2">
         <div className="accordion-item2">
           <div className="accordion-title2">
             <div>Filter</div>
-            <p className='text-muted clear'>CLEAR ALL</p>
+            {select_industry.length===0&&select_city.length===0&&select_market.length===0&&select_pain.length===0&&select_competitors.length===0? <p className='text-muted clear'>CLEAR ALL</p>
+:            <p className='text-primary clear' onClick={handleClear}>CLEAR ALL</p>
+}
           </div>
         </div>
       </div>
@@ -45,13 +82,20 @@ const handleIndustry=(e)=>{
           <div className="accordion-title1">
             <div> Country</div>
             <div style={{color:"#0263c7",fontWeight:"800"}}
-            onClick={()=>setCountry(!country)}
+            onClick={()=>{
+              setCountry(!country)
+               setCity(false)
+               setCompetitors(false)
+               setMarket(false)
+               setPainpoints(false)
+               setIndustry(false)
+            }}
             >{country? <>-</>:<>+</>}</div>
           </div>
           {country&&<div className="accordion-content1">
               <form>
-                <input type='checkbox' name="country" value="india"></input>
-                <label>India</label>  <br/>
+                <input type='checkbox' name="country" value="india" ></input>
+                <label >India</label>  <br/>
                 <input type='checkbox' name="country" value="southafrica"></input>
                 <label>South Africa</label>
               </form>
@@ -65,20 +109,27 @@ const handleIndustry=(e)=>{
           <div className="accordion-title1">
             <div>Industry</div>
             <div style={{color:"#0263c7",fontWeight:"800"}}
-            onClick={()=>setIndustry(!industry)}
+            onClick={()=>{
+              setIndustry(!industry)
+              setCountry(false)
+              setCity(false)
+              setCompetitors(false)
+              setMarket(false)
+              setPainpoints(false)
+            }}
             >{industry?<>-</>:<>+</>}</div>
           </div>
           {industry&&          <div className="accordion-content1">
           <form>
-          <input type='text' placeholder='Search' />
+          <input type='text' placeholder='Search'className='search-input'/>
           <br/>
           {
             industry_data&&industry_data.map((ind)=>{
               return(
                  <>
                  <div class="form-check">
-                 <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" />
-                 <label class="form-check-label" for="flexCheckChecked" onChange={handleIndustry}>
+                 <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleIndustry}/>
+                 <label class="form-check-label" style={{paddingTop:"6px"}}for="flexCheckChecked" >
                    {ind.name}
                  </label>
                </div>
@@ -92,28 +143,81 @@ const handleIndustry=(e)=>{
         </div>
       </div>
     {/* city */}
-    <div className="accordion1">
-        <div className="accordion-item1">
-          <div className="accordion-title1">
-            <div>City(where business will setup)</div>
-            <div style={{color:"#0263c7",fontWeight:"800"}}
-            onClick={()=>setCity(!city)}
-            >{city?<>-</>:<>+</>}</div>
-          </div>
-          {city&&          <div className="accordion-content1">content</div>
-}
-        </div>
+        <div className="accordion1">
+      <div className="accordion-item1">
+      <div className="accordion-title1">
+      <div>City(where business will setup)</div>
+      <div style={{color:"#0263c7",fontWeight:"800"}}
+      onClick={()=>
+        {
+          setCity(!city)
+          setCountry(false)
+          setCompetitors(false)
+          setMarket(false)
+          setPainpoints(false)
+          setIndustry(false)
+        }
+        }
+      >{city?<>-</>:<>+</>}</div>
+    </div>
+        {city&&          <div className="accordion-content1">
+        <form>
+      
+        {
+          city_data&&city_data.map((ind)=>{
+            return(
+               <>
+               <div class="form-check">
+               <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleCity}/>
+               <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+                 {ind.name}
+               </label>
+             </div>
+              
+               </>
+            )
+          })
+        }
+        </form>
+        </div>}
       </div>
+    </div>
 {/* competitors */}
   <div className="accordion1">
         <div className="accordion-item1">
           <div className="accordion-title1">
             <div>List of Competitors</div>
             <div style={{color:"#0263c7",fontWeight:"800"}}
-            onClick={()=>setCompetitors(!competitors)}
+            onClick={()=>
+              {setCompetitors(!competitors)
+                setCity(false)
+                setCountry(false)
+                setMarket(false)
+                setPainpoints(false)
+                setIndustry(false)
+              }}
             >{competitors?<>-</>:<>+</>}</div>
           </div>
-          {competitors&&<div className="accordion-content1">content</div>
+          {competitors&&<div className="accordion-content1">
+          <form>
+      
+          {
+            competitors_data&&competitors_data.map((ind)=>{
+              return(
+                 <>
+                 <div class="form-check">
+                 <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleCompetitors}/>
+                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+                   {ind.name}
+                 </label>
+               </div>
+                
+                 </>
+              )
+            })
+          }
+          </form>
+          </div>
           }
         </div>
       </div>
@@ -123,10 +227,36 @@ const handleIndustry=(e)=>{
           <div className="accordion-title1">
             <div>Market Segment(Age wise)</div>
             <div style={{color:"#0263c7",fontWeight:"800"}}
-            onClick={()=>setMarket(!market)}
+            onClick={()=>{setMarket(!market)
+              setCity(false)
+              setCountry(false)
+              setCompetitors(false)
+              setPainpoints(false)
+              setIndustry(false)
+            }}
             >{market?<>-</>:<>+</>}</div>
           </div>
-          {market&&          <div className="accordion-content1">content</div>
+          {market&&          <div className="accordion-content1">
+          <form>
+      
+          {
+            market_data&&market_data.map((ind)=>{
+              return(
+                 <>
+                 <div class="form-check">
+                 <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleMarket}/>
+                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+                   {ind.name}
+                 </label>
+               </div>
+                
+                 </>
+              )
+            })
+          }
+          </form>
+          
+          </div>
 }
         </div>
       </div>
@@ -136,17 +266,39 @@ const handleIndustry=(e)=>{
           <div className="accordion-title1">
             <div>Existing industry's Customer Pain Points</div>
             <div style={{color:"#0263c7",fontWeight:"800"}}
-            onClick={()=>setPainpoints(!painpoints)}
+            onClick={()=>{setPainpoints(!painpoints)
+              setCity(false)
+              setCountry(false)
+              setCompetitors(false)
+              setMarket(false)
+              setIndustry(false)
+            }}
             >{painpoints?<>-</>:<>+</>}</div>
           </div>
-          {painpoints&&          <div className="accordion-content1">content</div>}
+          {painpoints&&          <div className="accordion-content1">
+          <form>
+      
+          {
+            pain_data&&pain_data.map((ind)=>{
+              return(
+                 <>
+                 <div class="form-check">
+                 <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handlePain}/>
+                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+                   {ind.name}
+                 </label>
+               </div>
+                
+                 </>
+              )
+            })
+          }
+          </form>
+          </div>}
         </div>
       </div>
 
-      <button className='generate-btn'>
-      <img src={vector} alt="" />
-      <div>GENERATE REPORT</div>
-      </button> 
+     
       
     </div>
   )

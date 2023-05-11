@@ -1,17 +1,4 @@
-.generate-btn{
-    flex-grow: 0;
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
-    align-items: stretch;
-    gap: 10px;
-    margin: 30px 23px 59px 33px;
-    color: white;
-    border: none;
-    padding: 10px 85px;
-    border-radius: 9px;
-    background-color: #0263c7;
-  }
+
 .accordion1,.accordion2 {
     max-width: 600px;
   }
