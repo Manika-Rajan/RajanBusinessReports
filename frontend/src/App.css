@@ -76,6 +76,12 @@ body
   color: #fff;
   padding:8px, 16px, 8px, 16px
 }
+.nav-item .login-btn{
+  color: white;
+}
+.nav-item .login-btn:hover{
+  color: white;
+}
 .nav-popup{
   background-color:#293750;
   padding-top:10px ;

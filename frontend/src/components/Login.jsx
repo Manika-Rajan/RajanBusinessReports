@@ -1,13 +1,13 @@
 import React from 'react'
 import './Login.css'
-const Login = () => {
+const Login = ({setOtp}) => {
 
  const handleLogin=()=>{
-       
+       setOtp(true)
 }
 
   return (
-    <div style={{textAlign:"center"}}>
+    <div style={{textAlign:"center",height:"60vh",margin:"auto",marginTop:"13%"}}>
       <div className='login-title'>
         <h3>Please Enter Your Mobile Number</h3>
       </div>

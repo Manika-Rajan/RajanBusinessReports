@@ -9,7 +9,7 @@ import Otp from './Otp'
 const Navbar = (props) => {
 
   const [openModel,setOpenModel]=useState(false)
-
+  const [otp,setOtp]=useState(false)
   return (
     <>
     <div className='header'>
@@ -78,8 +78,9 @@ const Navbar = (props) => {
     >
     </ModalHeader>
     <ModalBody>
-
-    <Login/>
+    {
+      otp?<Otp/>:<Login setOtp={setOtp}/>
+    }
     </ModalBody>
     </Modal>
      
