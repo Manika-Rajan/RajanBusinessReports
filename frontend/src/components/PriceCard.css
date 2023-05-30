@@ -5,8 +5,9 @@
   /* margin: 22px 46.9px 78px 81px; */
   padding: 33.5px 36.1px 30px;
   border-radius: 20px;
-  box-shadow: 4px 4px 15px 0 rgba(175, 174, 174, 0.25);
   background-image: linear-gradient(to bottom, #2756a9 0%, #0263c7 100%);
+  box-shadow: 4px 4px 15px 0 #7a7b7b;
+
 }
 .price-card .price{
     width: 137px;

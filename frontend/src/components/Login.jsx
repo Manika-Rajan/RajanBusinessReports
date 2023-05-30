@@ -7,9 +7,9 @@ const Login = ({setOtp}) => {
 }
 
   return (
-    <div style={{textAlign:"center",height:"60vh",margin:"auto",marginTop:"13%"}}>
+    <div style={{textAlign:"center",height:"48vh",margin:"auto",marginTop:"5%"}}>
       <div className='login-title'>
-        <h3>Please Enter Your Mobile Number</h3>
+        <h3 className='login-title'>Please Enter Your Mobile Number</h3>
       </div>
       <div className='login-paragraph'>
       <p>We will send you a <strong>One Time Password</strong> </p>
@@ -26,7 +26,7 @@ const Login = ({setOtp}) => {
      <input type="text" class="form-control" placeholder="Enter Your 10 digit Mobile Number" style={{textAlign:"center"}}/>
    </div>
      </div>
-     <div>
+     <div style={{marginTop:"48px"}}>
      <button className='login-button'
       onClick={handleLogin}
      >SEND OTP</button>

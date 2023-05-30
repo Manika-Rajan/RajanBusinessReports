@@ -69,14 +69,11 @@ const Navbar = (props) => {
    
     </div>
     <Modal
-    size='lg'
+    
     isOpen={openModel}
     toggle={()=>setOpenModel(!openModel)}
-    >
-    <ModalHeader 
-    toggle={()=>setOpenModel(!openModel)}
-    >
-    </ModalHeader>
+    size="lg" style={{maxWidth: '650px', width: '100%',marginTop:"15%"}}>
+
     <ModalBody>
     {
       otp?<Otp/>:<Login setOtp={setOtp}/>

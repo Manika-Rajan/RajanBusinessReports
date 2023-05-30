@@ -1,22 +1,58 @@
 import React from 'react'
 import './Filters.css'
 import './Reports.css'
+import search from '../assets/search.svg'
 const Filters = ({updateIndustry,updateMarket,updateCity,updateCompetitors,updatePain,country,setCountry,
 industry,setIndustry,setCity,city,competitors,setCompetitors,market,setMarket,painpoints,setPainpoints,handleClear,select_industry,select_city,select_market,select_competitors,select_pain
 }) => {
   
 const industry_data=[
-{name:'Food & Beverages'},
-{name:'ITES'},
+{name:'Agriculture &Allied Activities'},
+{name:'Construction'},
 {name:'Manufacturing'},
-{name: 'Digital Marketing'},
-{name:'Management Consulting'}
+{name: 'Electricity Companies'},
+{name:'Mining'},
+{name:'Business Services'},
+{name:'Community,Sociall and Personal Services'},
+{name:'Real Estate and Rentining'},
+{name:'Trading'},
+{name:'Transport'},
+{name:'Finance'},
+{name:'Insurance'},
+{name:'Gas Companies'},
+{name:'Water Companies'},
+{name:'Quarrying'},
+{name:'Storage'},
+{name:'Communications'}
 ]
 const city_data=[
-  {name:'Hyderabad'},
+  {name:'Chattisgarh'},
+  {name:'Bihar'},
+  {name:'Maharashtra'},
+  {name:'Pondicherry'},
+  {name:'Uttarakhand'},
+  {name:'West Bengal'},
+  {name:'Karnataka'},
+  {name:'Chandigarh'},
+  {name:'Tamil Nadu'},
   {name:'Delhi'},
-  {name:'Mumbai'},
-  {name:'Kolkata'},
+  {name:'Gujarat'},
+  {name:'Telangana'},
+  {name:'Madhya Pradesh'},
+  {name:'Kerala'},
+  {name:'Punjab'},
+  {name:'Uttar Pradesh'},
+  {name:'Himachal Pradesh'},
+  {name:'Haryana'},
+  {name:'Rajasthan'},
+  {name:'Andhra Pradesh'},
+  {name:'Orissa'},
+  {name:'Goa'},
+  {name:'Jharkhand'},
+  {name:'Assam'},
+  {name:'Tripura'},
+  {name:'Jammu & Kashmir'},
+  {name:'Manipur'},
 ]
 const competitors_data=[
   {name:' India wide '},
@@ -64,8 +100,37 @@ const handlePain=(e)=>{
   updatePain(value,checked)
 
 }
+const handleIndustrySearch=(e)=>{
+  const searchField=e.targe.value;
+  const searchIndustry=industry.filter(
+    // item => {
+    //   return (
+    //     item
+    //     .name
+    //     .toLowerCase()
+    //     .includes(searchField.toLowerCase()) ||
+    //     person
+    //     .email
+    //     .toLowerCase()
+    //     .includes(searchField.toLowerCase())
+    //   );
+    // }
+  );
+
+}
   return (
     <div className='sidebar'>
+    
+    
+      <div className="accordion2">
+        <div className="accordion-item2">
+        <div style={{display:"flex",padding:"10px 32px"}}>
+        <input type='text' placeholder='What are you looking for'className='search-input' style={{border:"1px solid #AAAAAA",borderRadius:"20px"}}/>
+        <img src={search} style={{marginLeft:"-10%",marginBottom:"5%"}}></img>
+        </div>
+        </div>
+      </div>
+
        <div className="accordion2">
         <div className="accordion-item2">
           <div className="accordion-title2">
@@ -94,10 +159,18 @@ const handlePain=(e)=>{
           </div>
           {country&&<div className="accordion-content1">
               <form>
-                <input type='checkbox' name="country" value="india" ></input>
-                <label >India</label>  <br/>
-                <input type='checkbox' name="country" value="southafrica"></input>
-                <label>South Africa</label>
+              <div class="form-check">
+              <input class="form-check-input" type="radio" name="country" id="country"/>
+              <label class="form-check-label" for="country">
+                India
+              </label>
+            </div>
+            <div class="form-check">
+          <input class="form-check-input" type="radio" name="country" id="country"/>
+          <label class="form-check-label" for="country">
+            South Africa
+          </label>
+        </div>
               </form>
           </div>
 }
@@ -107,7 +180,7 @@ const handlePain=(e)=>{
      <div className="accordion1">
         <div className="accordion-item1">
           <div className="accordion-title1">
-            <div>Industry</div>
+            <div >Industry</div>
             <div style={{color:"#0263c7",fontWeight:"800"}}
             onClick={()=>{
               setIndustry(!industry)
@@ -121,15 +194,19 @@ const handlePain=(e)=>{
           </div>
           {industry&&          <div className="accordion-content1">
           <form>
-          <input type='text' placeholder='Search'className='search-input'/>
+          <div style={{display:"flex"}}>
+          <input type='text' placeholder='Search'className='search-input' onChange={handleIndustrySearch}/>
+          <img src={search} style={{marginLeft:"-6%",marginBottom:"5%"}}></img>
+          </div>
+          
           <br/>
           {
-            industry_data&&industry_data.map((ind)=>{
+            industry_data&&industry_data.map((ind,key)=>{
               return(
                  <>
                  <div class="form-check">
-                 <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleIndustry}/>
-                 <label class="form-check-label" style={{paddingTop:"6px"}}for="flexCheckChecked" >
+                 <input class={`form-check-input ind-${key}`} type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleIndustry}/>
+                 <label class="form-check-label" style={{paddingTop:"3px" ,}} for="flexCheckChecked" >
                    {ind.name}
                  </label>
                </div>
@@ -169,7 +246,7 @@ const handlePain=(e)=>{
                <>
                <div class="form-check">
                <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleCity}/>
-               <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+               <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"3px"}}>
                  {ind.name}
                </label>
              </div>
@@ -207,7 +284,7 @@ const handlePain=(e)=>{
                  <>
                  <div class="form-check">
                  <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleCompetitors}/>
-                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"3px"}}>
                    {ind.name}
                  </label>
                </div>
@@ -245,7 +322,7 @@ const handlePain=(e)=>{
                  <>
                  <div class="form-check">
                  <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handleMarket}/>
-                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"3px"}}>
                    {ind.name}
                  </label>
                </div>
@@ -284,7 +361,7 @@ const handlePain=(e)=>{
                  <>
                  <div class="form-check">
                  <input class="form-check-input" type="checkbox" value={ind.name} name={ind.name} id="flexCheckChecked" onChange={handlePain}/>
-                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"6px"}}>
+                 <label class="form-check-label" for="flexCheckChecked" style={{paddingTop:"3px"}}>
                    {ind.name}
                  </label>
                </div>

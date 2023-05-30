@@ -1,6 +1,6 @@
 import React from 'react'
 import './PriceCard.css'
-const PriceCard = () => {
+const PriceCard = ({price}) => {
   return (
     <div className='price-card'>
         <div className="card-text">
@@ -8,7 +8,7 @@ const PriceCard = () => {
       <p>*excluding gst</p>
         </div>
        <div className="price">
-       ₹0
+       <strong>₹{price}</strong>
        </div>
     </div>
   )
