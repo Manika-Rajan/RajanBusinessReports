@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Filters from './Filters'
 import PriceCard from './PriceCard'
 import './Reports.css'
 import india from '../assets/india.png'
 import Navbar from './Navbar' 
 import { useState } from 'react'
+import wrong from '../assets/wrong.svg'
+
 import HeadingAfter from './HeadingAfter'
 import HeadingBefore from './HeadingBefore'
 import vector from '../assets/vector.svg'
 import black from '../assets/black.svg'
+import { Link, useNavigate } from 'react-router-dom'
+import { Store } from '../Store'
 const Reports = () => {
+  const navigate=useNavigate()
+  const {state,dispatch:cxtDispatch}=useContext(Store)
+  const {totalPrice}=state
+
   const [generate,setGenerate]=useState(false)
   const [select_industry,setSelect_industry]=useState([])
   const [select_city,setSelect_city]=useState([])
@@ -167,11 +175,17 @@ const Reports = () => {
 
   const calculatePrice=(value)=>{
     setPrice(price+value)
+    cxtDispatch({type:'SET_PRICE',payload:price+value})
   }
   const removePrice=(value)=>{
     setPrice(price-value)
+    cxtDispatch({type:'SET_PRICE',payload:price-value})
   }
 
+
+  const handleGenerate=()=>{
+    navigate("/report-display")
+  }
   useEffect(()=>{
     
     if(select_industry.length===0&&select_city.length===0&&select_market.length===0&&select_pain.length===0&&select_competitors.length===0)
@@ -182,6 +196,17 @@ const Reports = () => {
   return (
     <>
     <Navbar reports/>
+    <div className="nav-popup row">
+    <div className="col-md-11">
+    <p className='container'>Use the Promo code "<strong>RBideas 25</strong>"to get an instant 25% discount during the purchase.Valid till 31st August 2023 
+    </p>
+    </div>
+   <div className="col-md-1 icon" style={{fontSize:"20px"}}>
+   {/* <i className="fa fa-times" aria-hidden="true"></i> */}
+  <img src={wrong} alt="" />
+   </div>
+   
+    </div>
     <div className='report row'>
       <div className="col-md-4 filters">
       <Filters updateIndustry={updateIndustry} updateCity={updateCity} updateCompetitors={updateCompetitors} updateMarket={updateMarket} updatePain={updatePain}
@@ -507,7 +532,7 @@ const Reports = () => {
         <div className="col-md-8 mt-4" style={{alignItems:"center"}}>
           {select_industry.length===0&&select_city.length===0&&select_market.length===0&&select_pain.length===0&&select_competitors.length===0? 
             <>
-            <button className='generate-btn' style={{background:" white",color:"black"}}>
+            <button className='generate-btn' style={{background:" white",color:"black"}} >
             <div className='black-img'>
             <img src={black} alt="" />
             </div> 
@@ -517,7 +542,7 @@ const Reports = () => {
             </>
 :
 <>
-<button className='generate-btn' style={{background:" #0263c7",color:"white"}}>
+<button className='generate-btn' style={{background:" #0263c7",color:"white"}} onClick={handleGenerate}>
 <div className='white-img'>
           <img src={vector} alt="" />
           </div>

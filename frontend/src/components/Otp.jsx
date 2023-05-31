@@ -1,6 +1,12 @@
 import React from 'react'
 import './Login.css'
-const Otp = () => {
+const Otp = ({setVerify,setOtp,setLogin}) => {
+
+  const EmailVerify=()=>{
+    setOtp(false)
+    setLogin(false)
+    setVerify(true)
+  }
   return (
     <div>
     <div  style={{textAlign:"center",height:"48vh",margin:"auto",marginTop:"3%"}}>
@@ -19,7 +25,7 @@ const Otp = () => {
    </div>
    </div>
    <div>
-   <button className='login-button'>LOGIN</button>
+   <button className='login-button' onClick={EmailVerify}>LOGIN</button>
    <p style={{color:" #0263C7",marginTop:"15px"}}>RESEND OTP</p>
    <p style={{color:"grey"}}>Entered a Wrong Mobile Number?</p>
    </div>

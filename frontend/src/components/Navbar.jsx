@@ -1,15 +1,17 @@
 import React from 'react'
 import logo from '../assets/logo.svg'
 import { Link } from 'react-router-dom'
-import wrong from '../assets/wrong.svg'
 import { useState } from 'react'
 import Login from './Login'
 import {Modal,ModalBody,ModalHeader} from "reactstrap"
 import Otp from './Otp'
+import EmailVerify from './EmailVerify'
 const Navbar = (props) => {
 
   const [openModel,setOpenModel]=useState(false)
+  const [login,setLogin]=useState(true)
   const [otp,setOtp]=useState(false)
+  const [verify,setVerify]=useState(false)
   return (
     <>
     <div className='header'>
@@ -37,7 +39,7 @@ const Navbar = (props) => {
         </li>
         <li className="nav-item"
         style={{marginRight:"80px"}}>
-          <Link to="/reports" className="nav-link" href="#">Reports</Link>
+          <Link to="/" className="nav-link" href="#">Reports</Link>
           <div className={props.reports?"active":""} ></div>
 
         </li>
@@ -57,17 +59,7 @@ const Navbar = (props) => {
   </div>
 </nav>
     </div>
-    <div className="nav-popup row">
-    <div className="col-md-11">
-    <p className='container'>Use the Promo code "<strong>RBideas 25</strong>"to get an instant 25% discount during the purchase.Valid till 31st August 2023 
-    </p>
-    </div>
-   <div className="col-md-1 icon" style={{fontSize:"20px"}}>
-   {/* <i className="fa fa-times" aria-hidden="true"></i> */}
-  <img src={wrong} alt="" />
-   </div>
    
-    </div>
     <Modal
     
     isOpen={openModel}
@@ -76,7 +68,13 @@ const Navbar = (props) => {
 
     <ModalBody>
     {
-      otp?<Otp/>:<Login setOtp={setOtp}/>
+      login&&<Login setOtp={setOtp}  setVerify={setVerify} setLogin={setLogin}/>
+    }
+    {
+      otp&&<Otp setOtp={setOtp}  setVerify={setVerify} setLogin={setVerify}/>
+    }
+    {
+      verify&&<EmailVerify setOtp={setOtp}  setLogin={setLogin}/>
     }
     </ModalBody>
     </Modal>

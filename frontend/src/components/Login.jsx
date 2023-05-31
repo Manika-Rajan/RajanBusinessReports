@@ -1,8 +1,10 @@
 import React from 'react'
 import './Login.css'
-const Login = ({setOtp}) => {
+const Login = ({setOtp,setLogin,setVerify}) => {
 
  const handleLogin=()=>{
+  setLogin(false)
+  setVerify(false)
        setOtp(true)
 }
 

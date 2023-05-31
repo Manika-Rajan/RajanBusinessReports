@@ -1,0 +1,92 @@
+
+.report-display-title{
+    height: 24px;
+left: 143px;
+top: 34px;
+font-family: 'Baskerville Old Face';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 24px;
+letter-spacing: 0.03em;
+
+color: #181818;
+
+}
+.report-display-desc{
+width: 653.35px;
+height: 32px;
+/* left: 143px; */
+top: 60px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+letter-spacing: 0.03em;
+
+color: #293750;
+
+}
+.buy-btn{
+    width: 200x;
+  height: 36px;
+  border-radius: 9px;
+  background-color: #0263c7;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.48px;
+  text-align:center;
+  color: #fff;
+  padding:8px, 16px, 8px, 16px;
+  /* margin-left: 30%; */
+}
+.buy-btn:hover{
+  color:white;
+}
+.pay-btn{
+  margin: auto;
+  width: 50%;
+  height: 36px;
+  border-radius: 9px;
+  background-color: #0263c7;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.48px;
+  text-align:center;
+  color: #fff;
+  padding:8px, 16px, 8px, 16px;
+}
+.pdf-div{
+  margin:auto;
+  width:50%;
+  height: 350px;
+  border-radius: 15px;;
+  border:1px solid #0263c7;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.pay-price{
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 33px;
+  text-align: center;
+  margin-top:2% ;
+  margin-bottom: 2%;
+}
+.payment-name{
+  display: flex;
+  flex-direction: column;
+}

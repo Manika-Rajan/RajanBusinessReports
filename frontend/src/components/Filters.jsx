@@ -118,6 +118,7 @@ const handleIndustrySearch=(e)=>{
   );
 
 }
+
   return (
     <div className='sidebar'>
     
@@ -125,7 +126,7 @@ const handleIndustrySearch=(e)=>{
       <div className="accordion2">
         <div className="accordion-item2">
         <div style={{display:"flex",padding:"10px 32px"}}>
-        <input type='text' placeholder='What are you looking for'className='search-input' style={{border:"1px solid #AAAAAA",borderRadius:"20px"}}/>
+        <input type='text' placeholder='What are you looking for'className='search-input' style={{border:"1px solid #AAAAAA",borderRadius:"20px",paddingLeft:"20px"}}/>
         <img src={search} style={{marginLeft:"-10%",marginBottom:"5%"}}></img>
         </div>
         </div>
