@@ -1,0 +1,151 @@
+body 
+{
+  background-color: #f4f8fb;
+}
+.navbar-custom{
+  background-color:transparent;
+}
+.header{
+  width: 100%;
+  background-color: #fff;
+}
+.nav-left{
+  display: flex;
+}
+.nav-title{
+  width: 585px;
+  font-family: BaskervilleOldFace;
+  font-size: 29px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.87px;
+  text-align: left;
+  color: #181818;
+}
+.nav-left text p{
+  width: 163px;
+  font-family: OpenSans;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  text-align: left;
+  color: #000;
+}
+.navbar-collapse ul{
+  justify-content: space-around;
+}
+.navbar-collapse ul li{
+  width: 60px;
+  height: 26px;
+
+}
+.navbar-collapse ul li a{
+  font-size: 19px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+
+.active{
+  height:3px;
+  width:75px;
+  background-color: #0263c7;
+}
+.login-btn{
+  width: 84px;
+  height: 36px;
+  border-radius: 9px;
+  background-color: #0263c7;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.48px;
+  text-align:center;
+  color: #fff;
+  padding:8px, 16px, 8px, 16px
+}
+.nav-item .login-btn{
+  color: white;
+}
+.nav-item .login-btn:hover{
+  color: white;
+}
+.nav-popup{
+  background-color:#293750;
+  padding-top:10px ;
+  padding-bottom: 1px;
+}
+.nav-popup{
+  display: flex;
+  color: white;
+}
+.nav-popup p{
+  text-align: center;
+}
+.nav-popup  .fa{
+  text-align: right;
+  justify-content: end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media all and (max-width:1279px)
+{
+    
+.nav-title{
+  width: 355px;
+  font-family: BaskervilleOldFace;
+  font-size: 19px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.87px;
+  text-align: left;
+  color: #181818;
+}
+.nav-left text p{
+  width: 63px;
+  font-family: OpenSans;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+}
+
+@media all and (max-width:767px)
+{
+.nav-title{
+  width: 150px;
+  font-family: BaskervilleOldFace;
+  font-size: 15px;
+}
+.text-desc{
+  width: 100px;
+  font-family: OpenSans;
+  font-size: 10px;
+ }
+
+}
