@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Navbar from './Navbar'
 import './ReportDisplay.css'
+import './PaymentGateway'
 import Personal from '../assets/Personal.svg'
 import Delivery from '../assets/Delivery.svg'
 import pencil from '../assets/pencil.svg'
@@ -8,6 +9,7 @@ import { Store } from '../Store'
 const Payment = () => {
     const {state,dispatch:cxtDispatch}=useContext(Store)
     const {totalPrice}=state
+    const {showRazorpay}=state
   return (
     <div>
     <Navbar reports/>
@@ -45,7 +47,7 @@ const Payment = () => {
       <p className='pay-price'>Total Price:₹{totalPrice}</p>
       </div>
       <div className='row'>
-       <button className='pay-btn '>PAY NOW</button>
+       <button onClick={showRazorpay} className='pay-btn '>PAY NOW</button>
       </div>
       </div>
      </div>
