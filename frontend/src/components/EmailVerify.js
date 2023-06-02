@@ -1,6 +1,9 @@
 import React from 'react'
 
 const EmailVerify = () => {
+  const verifyMail=()=>{
+    
+  }
   return (
     <div>
     <div style={{textAlign:"center",height:"50vh",margin:"auto",marginTop:"5%"}}>
@@ -16,7 +19,7 @@ const EmailVerify = () => {
  </div>
    </div>
    <div className='mb-4' style={{marginTop:"35px"}}>
-   <button className='login-button'
+   <button onclick={verifyMail} className='login-button'
    >Verify</button>
    </div>
    <i>Note:This is a onetime verification.The report will be delivered to this email.</i>

@@ -15,11 +15,11 @@ env = environ.Env()
 environ.Env.read_env()
 
 
-@api_view(['POST'])
+@api_view (['POST'])
 def start_payment(request):
     # request.data is coming from frontend
     amount = request.data['amount']
-    name = request.data['name']
+    
 
     # setup razorpay client this is the client to whom user is paying money to (us)
     client = razorpay.Client(auth=(env('PUBLIC_KEY'), env('SECRET_KEY')))
@@ -35,7 +35,7 @@ def start_payment(request):
     # we are saving an order with isPaid=False because we've just initialized the order
     # we haven't received the money we will handle the payment succes in next 
     # function
-    order = Order.objects.create(order_product=name, 
+    order = Order.objects.create( 
                                  order_amount=amount, 
                                  order_payment_id=payment['id'])
 

@@ -1,12 +1,14 @@
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Payment";
 import "./PaymentGateway.css"
 import { server } from "./Server";
-
+import { Store } from '../Store'
 
 function PaymentGateway() {
-  
+  const {state,dispatch:cxtDispatch}=useContext(Store)
+    const {totalPrice}=state
+  const [amount, setAmount] = useState();
 
 // this function will handel payment when user submit his/her money
 // and it will confim if payment is successfull or not
@@ -29,6 +31,7 @@ function PaymentGateway() {
         .then((res) => {
           console.log("Everything is OK!");
           
+          
         })
         .catch((err) => {
           console.log(err);
@@ -48,12 +51,15 @@ function PaymentGateway() {
   const showRazorpay = async () => {
     const res = await loadScript();
 
-    //let bodyData = new FormData();
+    let bodyData = new FormData();
+    console.log(amount);
+    setAmount({totalPrice});
+
 
     // we will pass the amount and product name to the backend using form data
-    //bodyData.append("totalprice", totalprice.toString());
+    bodyData.append("amount", totalPrice.toString());
     
-
+    
     const data = await Axios({
       url: `${server}/razorpay/pay/`,
       method: "POST",
@@ -61,7 +67,7 @@ function PaymentGateway() {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      //data: bodyData,
+      data: bodyData,
     }).then((res) => {
       return res;
     });
@@ -72,7 +78,7 @@ function PaymentGateway() {
     var options = {
       key_id: process.env.REACT_APP_PUBLIC_KEY, // in react your environment variable must start with REACT_APP_
       key_secret: process.env.REACT_APP_SECRET_KEY,
-      amount: data.data.payment.totalprice,
+      amount: data.data.payment.amount,
       currency: "INR",
       name: "Rajan Business Ideas Pvt. Ltd",
       description: "Test transaction",
@@ -100,7 +106,22 @@ function PaymentGateway() {
     rzp1.open();
   };
 
+  return (
+    <div className="container" style={{ marginTop: "20vh" }}>
+      <form>
+        <h1>Payment page</h1>
 
+        
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Total Price:₹{totalPrice}</label>
+          
+        </div>
+      </form>
+      <button onClick={showRazorpay} className="btn btn-primary btn-block">
+        Pay with razorpay
+      </button>
+    </div>
+  );
 }
 
-export default PaymentGateway
+export default PaymentGateway;

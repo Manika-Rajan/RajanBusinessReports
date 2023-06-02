@@ -6,10 +6,14 @@ import Personal from '../assets/Personal.svg'
 import Delivery from '../assets/Delivery.svg'
 import pencil from '../assets/pencil.svg'
 import { Store } from '../Store'
+import { useNavigate } from 'react-router-dom'
 const Payment = () => {
+    const navigate=useNavigate()
     const {state,dispatch:cxtDispatch}=useContext(Store)
     const {totalPrice}=state
-    const {showRazorpay}=state
+    const handlepay=()=>{
+      navigate('/paymentgateway')
+    }
   return (
     <div>
     <Navbar reports/>
@@ -47,7 +51,7 @@ const Payment = () => {
       <p className='pay-price'>Total Price:₹{totalPrice}</p>
       </div>
       <div className='row'>
-       <button onClick={showRazorpay} className='pay-btn '>PAY NOW</button>
+       <button onClick={handlepay} className='pay-btn '>PAY NOW</button>
       </div>
       </div>
      </div>
