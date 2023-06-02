@@ -18,9 +18,9 @@ const ReportsDisplay = () => {
     <div className="container-fluid">
       <div className="nav-left">
        <div className="logo">
-       <a className="navbar-brand" href="#">
+       <Link to="/" className="navbar-brand" >
         <img src={logo} alt="" style={{width:"60px",height:"60px"}} />
-       </a>
+       </Link>
        </div>
        <div className="text">
           <p className='nav-title report-display-title'>Confectionary for Toodlers & Teens</p>

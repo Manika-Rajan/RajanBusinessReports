@@ -6,7 +6,7 @@ export const Store=createContext();
 const initialState={
     isLogin:true,
     name:'',
-    phone:'',
+    phone:'+916309019170',
     email:'',
     totalPrice:0,    
 }

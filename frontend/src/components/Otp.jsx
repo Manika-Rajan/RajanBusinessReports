@@ -1,5 +1,6 @@
 import React from 'react'
 import './Login.css'
+import './Login'
 const Otp = ({setVerify,setOtp,setLogin}) => {
 
   const EmailVerify=()=>{
@@ -14,7 +15,7 @@ const Otp = ({setVerify,setOtp,setLogin}) => {
       <h3>Please Enter the One Time Password to Login</h3>
     </div>
     <div className='login-paragraph'>
-    <p>OTP has been sent to +91-989337892 </p>
+    <p>OTP has been sent </p>
   <div className="otp-fields">
     <input />
     <input />
@@ -24,6 +25,7 @@ const Otp = ({setVerify,setOtp,setLogin}) => {
     <input />
    </div>
    </div>
+   
    <div>
    <button className='login-button' onClick={EmailVerify}>LOGIN</button>
    <p style={{color:" #0263C7",marginTop:"15px"}}>RESEND OTP</p>

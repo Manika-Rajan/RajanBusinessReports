@@ -192,9 +192,9 @@ const Reports = () => {
   }
 
 
-  const handleGenerate=()=>{
-    navigate("/report-display")
-  }
+  // const handleGenerate=()=>{
+  //   navigate("/report-display")
+  // }
   useEffect(()=>{
     
     if(select_industry.length===0&&select_city.length===0&&select_market.length===0&&select_pain.length===0&&select_competitors.length===0)
@@ -551,11 +551,16 @@ const Reports = () => {
             </>
 :
 <>
-<button className='generate-btn' style={{background:" #0263c7",color:"white"}} onClick={handleGenerate}>
-<div className='white-img'>
+<button className='generate-btn' style={{background:" #0263c7",color:"white"}} >
+<Link to="/report-display"  style={{textDecoration:"none"}}>
+<div className='' style={{display:"flex"}}>
+     <div className='white-img' >
           <img src={vector} alt="" />
           </div>
-          <div>GENERATE REPORT</div>
+          <div className='' style={{color:"white"}}>&nbsp;&nbsp;GENERATE REPORT</div>
+          </div>
+
+          </Link>
 
 </button> 
 </>

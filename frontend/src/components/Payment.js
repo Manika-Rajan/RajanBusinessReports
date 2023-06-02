@@ -1,19 +1,28 @@
-import React, { useContext,useState } from 'react'
+import Axios from "axios";
+import React, { useContext, useState } from 'react'
 import Navbar from './Navbar'
 import './ReportDisplay.css'
+import { server } from "./Server";
+import "./PaymentGateway.css"
 import Personal from '../assets/Personal.svg'
 import Delivery from '../assets/Delivery.svg'
 import pencil from '../assets/pencil.svg'
 import green from '../assets/green-tick.svg'
 import { Store } from '../Store'
+//import { useNavigate } from 'react-router-dom'
 const Payment = () => {
+    //const navigate=useNavigate()
     const {state,dispatch:cxtDispatch}=useContext(Store)
     const {totalPrice,name,phone,email}=state
     const [editName,setEditName]=useState(false)
     const [editEmail,setEditEmail]=useState(false)
     const [inputName,setInputname]=useState('')
     const [inputEmail,setInputEmail]=useState('')
+
     const [success,setSuccess]=useState(false)
+    const [error,setError]=useState(false)
+    const [verify,setVerify]=useState(false)
+
     const handleName=(e)=>{
       if (e.key === 'Enter') {
          cxtDispatch({type:'SET_NAME',payload:inputName})
@@ -28,6 +37,106 @@ const Payment = () => {
      }
     }
 
+    const [amount, setAmount] = useState();
+    const handlePaymentSuccess = async (response) => {
+      try {
+        let bodyData = new FormData();
+  
+        // we will send the response we've got from razorpay to the backend to validate the payment
+        bodyData.append("response", JSON.stringify(response));
+  
+        await Axios({
+          url: `${server}/razorpay/payment/success/`,
+          method: "POST",
+          data: bodyData,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            console.log("Everything is OK!");
+            
+            
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } catch (error) {
+        console.log(console.error());
+      }
+    };
+  
+    // this will load a script tag which will open up Razorpay payment card to make //transactions
+    const loadScript = () => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      document.body.appendChild(script);
+    };
+    const showRazorpay = async () => {
+      if(name&&email&&verify)
+      {
+        setError(false)
+      const res = await loadScript();
+  
+      let bodyData = new FormData();
+      console.log(amount);
+      setAmount({totalPrice});
+  
+  
+      // we will pass the amount and product name to the backend using form data
+      bodyData.append("amount", totalPrice.toString());
+      
+      
+      const data = await Axios({
+        url: `${server}/razorpay/pay/`,
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: bodyData,
+      }).then((res) => {
+        return res;
+      });
+  
+      // in data we will receive an object from the backend with the information about the payment
+      //that has been made by the user
+  
+      var options = {
+        key_id: process.env.REACT_APP_PUBLIC_KEY, // in react your environment variable must start with REACT_APP_
+        key_secret: process.env.REACT_APP_SECRET_KEY,
+        amount: data.data.payment.amount,
+        currency: "INR",
+        name: "Rajan Business Ideas Pvt. Ltd",
+        description: "Test transaction",
+        image: "", // add image url
+        order_id: data.data.payment.id,
+        handler: function (response) {
+          // we will handle success by calling handlePaymentSuccess method and
+          // will pass the response that we've got from razorpay
+          handlePaymentSuccess(response);
+        },
+        prefill: {
+          name: "User's name",
+          email: "User's email",
+          contact: "User's phone",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+  
+      var rzp1 = new window.Razorpay(options);
+      rzp1.open();}
+      else{
+         setError(true)
+      }
+      
+    };
   return (
     <div>
     <Navbar reports/>
@@ -92,7 +201,7 @@ const Payment = () => {
          </div>
        </div>}
       <div class="form-check" style={{paddingLeft:"25%" ,paddingTop:"5%"}}>
-      <input class="form-check-input" type="checkbox" name="terms" id="terms"/>
+      <input class="form-check-input" type="checkbox" name="verify" id="verify" onChange={(e)=>setVerify(e.target.checked)} />
       <label class="form-check-label" for="country">
       <p className='text-secondary'>  I agree to all terms <span className='text-primary'>Terms&Conditions</span></p>
       </label>
@@ -109,11 +218,11 @@ const Payment = () => {
       <p className='pay-price'>Total Price:₹{totalPrice}</p>
       </div>
       <div className='row'>
-       <button className='pay-btn '>PAY NOW</button>
+       <button onClick={showRazorpay} className='pay-btn '>PAY NOW</button>
       </div>
-      <div className='row'>
+      {error&&<div className='row'>
       <p className='error-message'>*Please enter your name to proceed</p>
-     </div>
+     </div>}
 
       </div>
      </div>

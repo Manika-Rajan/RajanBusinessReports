@@ -12,7 +12,7 @@ const Navbar = (props) => {
 
   const [openModel,setOpenModel]=useState(false)
   const [login,setLogin]=useState(true)
-  const [otp,setOtp]=useState(false)
+  const [otp,sendOtp]=useState(false)
   const [verify,setVerify]=useState(false)
   const [logout,setLogout]=useState(false)
   const {state,dispatch:cxtDispatch}=useContext(Store)
@@ -104,13 +104,13 @@ const Navbar = (props) => {
 
     <ModalBody>
     {
-      login&&<Login setOtp={setOtp}  setVerify={setVerify} setLogin={setLogin}/>
+      login&&<Login sendOtp={sendOtp}  setVerify={setVerify} setLogin={setLogin}/>
     }
     {
-      otp&&<Otp setOtp={setOtp}  setVerify={setVerify} setLogin={setVerify}/>
+      otp&&<Otp sendOtp={sendOtp}  setVerify={setVerify} setLogin={setVerify}/>
     }
     {
-      verify&&<EmailVerify setOtp={setOtp}  setLogin={setLogin}/>
+      verify&&<EmailVerify sendOtp={sendOtp}  setLogin={setLogin}/>
     }
     </ModalBody>
     </Modal>

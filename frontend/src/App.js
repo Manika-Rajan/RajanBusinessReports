@@ -7,6 +7,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import ReportsDisplay from './components/ReportsDisplay';
 import Payment from './components/Payment';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/report-display' element={<ReportsDisplay/>}/>
         <Route path='/payment' element={<Payment/>}/>
+        
       </Routes>
     </div>
     </BrowserRouter>
