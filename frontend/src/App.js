@@ -6,7 +6,7 @@ import Reports from './components/Reports';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import ReportsDisplay from './components/ReportsDisplay';
 import Payment from './components/Payment';
-import PaymentGateway from './components/PaymentGateway';
+
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/report-display' element={<ReportsDisplay/>}/>
         <Route path='/payment' element={<Payment/>}/>
-        <Route path='/paymentgateway' element={<PaymentGateway/>}/>
+        
       </Routes>
     </div>
     </BrowserRouter>
