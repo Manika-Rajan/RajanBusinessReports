@@ -137,3 +137,23 @@ body
  }
 
 }
+.user-name{
+
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+
+letter-spacing: 0.03em;
+margin-top: 8%;
+color: #0263C7;
+
+}
+.logout{
+  text-align: center;
+  background-color: #b7b7b8;
+  padding: 5%;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}

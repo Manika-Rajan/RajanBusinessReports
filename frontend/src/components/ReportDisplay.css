@@ -123,3 +123,8 @@ letter-spacing: 0.03em;
 
 color: #E70000;
 }
+.edit-input:focus{
+  border: none;
+  border-bottom: 1px solid #0263c7;
+  outline: none;
+}

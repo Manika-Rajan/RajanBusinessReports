@@ -17,7 +17,7 @@ const Login = ({setOtp,setLogin,setVerify}) => {
       <p>We will send you a <strong>One Time Password</strong> </p>
     </div>
     <div className='login-phone-input' style={{width:"70%",textAlign:"center",margin:"auto"}}>
-    <div class="input-group mb-3" style={{marginRight:"20px",width:"17%"}}>
+    <div class="input-group mb-3" style={{marginRight:"20px",width:"23%"}}>
     <select class="form-select" aria-label="Default select example">
             <option selected>+91</option>
             <option value="2">+11</option>

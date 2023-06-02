@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../assets/logo.svg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
@@ -6,12 +6,17 @@ import Login from './Login'
 import {Modal,ModalBody,ModalHeader} from "reactstrap"
 import Otp from './Otp'
 import EmailVerify from './EmailVerify'
+import { Store } from '../Store'
+import avatar from '../assets/avatar.svg'
 const Navbar = (props) => {
 
   const [openModel,setOpenModel]=useState(false)
   const [login,setLogin]=useState(true)
   const [otp,setOtp]=useState(false)
   const [verify,setVerify]=useState(false)
+  const [logout,setLogout]=useState(false)
+  const {state,dispatch:cxtDispatch}=useContext(Store)
+  const {name,isLogin}=state
   return (
     <>
     <div className='header'>
@@ -50,9 +55,40 @@ const Navbar = (props) => {
           <div className={props.contact?"active":""} ></div>
         </li>
         <li className="nav-item">
-          <button className="nav-link login-btn"
-          onClick={()=>setOpenModel(true)}
-          >LOGIN</button>
+           {
+            isLogin&&name&& <>
+            <div className='' style={{display:"flex",marginTop:"5%"}}>
+            <div className=''>
+            <p className='user-name'>{name}</p>
+            </div>
+             <div className=''>
+             <img src={avatar} style={{cursor:"pointer"}} onClick={()=>setLogout(!logout)}/>
+             </div>
+            
+            </div>
+            {logout&&<div className='logout'>Logout</div>}
+         </>
+           }
+           {
+            isLogin&&!name&&<>
+            <div className='' style={{display:"flex",marginTop:"10%"}}>
+            <div className=''>
+            <p className='user-name'>Hello!</p>
+            </div>
+             <div className=''>
+             <img src={avatar}  style={{cursor:"pointer"}} onClick={()=>setLogout(!logout)}/>
+             </div>
+            </div>
+            {logout&&<div className='logout'>Logout</div>}
+            </>
+           }
+          {
+            !isLogin&&<button className="nav-link login-btn"
+            onClick={()=>setOpenModel(true)}
+            >LOGIN</button>
+          }
+          
+
         </li>
       </ul>
     </div>

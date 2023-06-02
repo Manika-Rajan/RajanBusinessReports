@@ -8,9 +8,26 @@ import green from '../assets/green-tick.svg'
 import { Store } from '../Store'
 const Payment = () => {
     const {state,dispatch:cxtDispatch}=useContext(Store)
-    const {totalPrice}=state
+    const {totalPrice,name,phone,email}=state
     const [editName,setEditName]=useState(false)
     const [editEmail,setEditEmail]=useState(false)
+    const [inputName,setInputname]=useState('')
+    const [inputEmail,setInputEmail]=useState('')
+    const [success,setSuccess]=useState(false)
+    const handleName=(e)=>{
+      if (e.key === 'Enter') {
+         cxtDispatch({type:'SET_NAME',payload:inputName})
+         setEditName(false)
+      }
+    }
+    const handleEmail=(e)=>{
+      if (e.key === 'Enter') {
+        cxtDispatch({type:'SET_EMAIL',payload:inputEmail})
+        setEditEmail(false)
+        setSuccess(true)
+     }
+    }
+
   return (
     <div>
     <Navbar reports/>
@@ -25,8 +42,10 @@ const Payment = () => {
            </div>
            <div className='' style={{paddingRight:"30px"}}>
            {
-            editName? <input style={{border:"none",background:"transparent",borderBottom:"1px solid #0263c7"}}/>:
-            <p style={{fontSize:"20px",fontWeight:"400"}}>Akrithi</p>
+            editName? <input  className='edit-input'  style={{border:"none",background:"transparent",borderBottom:"1px solid #0263c7"}} name="inputName" value={inputName} onChange={(e)=>setInputname(e.target.value)} onKeyDown={handleName}
+            
+            />:
+            <p style={{fontSize:"20px",fontWeight:"400"}}>{name}</p>
            }
           
            </div>
@@ -39,10 +58,10 @@ const Payment = () => {
          <label style={{fontSize:"20px",fontWeight:"600"}}>Phone Number:</label>       
            </div>
            <div className='' style={{paddingRight:"30px"}}>
-           <p style={{fontSize:"20px",fontWeight:"400"}}>+916309019170</p>
+           <p style={{fontSize:"20px",fontWeight:"400"}}>{phone}</p>
            </div>
          </div>
-         <div className='row'style={{textAlign:"center"}}>
+         <div className='row mt-2'style={{textAlign:"center"}}>
          <img src={Delivery} style={{width:"187px",height:"36px",marginLeft:"15%"}}/>
          </div>
          <div className='payment-name mt-3'>
@@ -51,8 +70,12 @@ const Payment = () => {
            </div>
            <div className='' style={{paddingRight:"30px"}}>
            {
-            editEmail? <input style={{border:"none",background:"transparent",borderBottom:"1px solid #0263c7"}}/>:
-            <p style={{fontSize:"20px",fontWeight:"400"}}>jahnavi15@gmail.com</p>
+            editEmail? <input className='edit-input' style={{border:"none",background:"transparent",borderBottom:"1px solid #0263c7"}}
+            name="inputEmail" value={inputEmail}
+            onChange={(e)=>setInputEmail(e.target.value)}
+            onKeyDown={handleEmail}
+            />:
+            <p style={{fontSize:"20px",fontWeight:"400"}}>{email}</p>
            }
            
            </div>
@@ -60,14 +83,14 @@ const Payment = () => {
            <img src={pencil} onClick={()=>setEditEmail(!editEmail)}/>
            </div>
          </div>
-         <div class="success-message" style={{marginLeft:"20%" ,marginTop:"5%"}}>
+         {success&&<div class="success-message" style={{marginLeft:"20%" ,marginTop:"5%"}}>
          <div>
          <img src={green}/>
          </div>
          <div>
          Your email id has been changed successfully
          </div>
-       </div>
+       </div>}
       <div class="form-check" style={{paddingLeft:"25%" ,paddingTop:"5%"}}>
       <input class="form-check-input" type="checkbox" name="terms" id="terms"/>
       <label class="form-check-label" for="country">
