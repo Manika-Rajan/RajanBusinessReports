@@ -15,13 +15,13 @@ const Navbar = (props) => {
   return (
     <>
     <div className='header'>
-      <nav className="navbar navbar-expand-lg bg-light">
-  <div className="container-fluid row">
-    <div className="nav-left col-md-4">
+      <nav className="navbar navbar-expand-lg bg-light" style={{marginLeft:"2%"}}>
+  <div className="container-fluid">
+    <div className="nav-left">
      <div className="logo">
-     <a className="navbar-brand" href="#">
+     <Link to="/" className="navbar-brand" >
       <img src={logo} alt="" style={{width:"60px",height:"60px"}} />
-     </a>
+     </Link>
      </div>
      <div className="text">
         <p className='nav-title'>Rajan Business Report Services</p>
@@ -31,7 +31,7 @@ const Navbar = (props) => {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
-    <div className="collapse navbar-collapse justify-content-end col-md-8" id="navbarSupportedContent">
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav">
         <li className="nav-item" style={{marginRight:"80px"}}>
           <Link to="/about" className="nav-link" aria-current="page" href="#">About</Link>

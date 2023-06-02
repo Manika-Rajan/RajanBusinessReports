@@ -39,11 +39,14 @@ const Reports = () => {
   const [expandCompetitors,setExpandCompetitors]=useState(false)
   const [expandPain,setExpandPain]=useState(false)
 
+  const [popup,setPopup]=useState(true)
+  const [noSearch,setNoSearch]=useState(false)
 
  const [price,setPrice]=useState(0)
 
   const updateIndustry=(value,checked)=>{
     console.log(checked,value)
+    setNoSearch(false)
     if(checked)
     {
       setSelect_industry(prev=>[...prev,value])
@@ -69,6 +72,7 @@ const Reports = () => {
 
   const updateCity=(value,checked)=>{
     console.log(checked,value)
+    setNoSearch(false)
     if(checked)
     {
       setSelect_city(prev=>[...prev,value])
@@ -92,6 +96,7 @@ const Reports = () => {
 
   const updateCompetitors=(value,checked)=>{
     console.log(checked,value)
+    setNoSearch(false)
     if(checked)
     {
       setSelect_competitors(prev=>[...prev,value])
@@ -117,6 +122,8 @@ const Reports = () => {
  
   const updateMarket=(value,checked)=>{
     console.log(checked,value)
+    setNoSearch(false)
+
     if(checked)
     {
       setSelect_market(prev=>[...prev,value])
@@ -143,6 +150,8 @@ const Reports = () => {
 
   const updatePain=(value,checked)=>{
     console.log(checked,value)
+    setNoSearch(false)
+
     if(checked)
     {
       setSelect_pain(prev=>[...prev,value])
@@ -196,17 +205,17 @@ const Reports = () => {
   return (
     <>
     <Navbar reports/>
-    <div className="nav-popup row">
+    {popup&&<div className="nav-popup row">
     <div className="col-md-11">
     <p className='container'>Use the Promo code "<strong>RBideas 25</strong>"to get an instant 25% discount during the purchase.Valid till 31st August 2023 
     </p>
     </div>
    <div className="col-md-1 icon" style={{fontSize:"20px"}}>
-   {/* <i className="fa fa-times" aria-hidden="true"></i> */}
-  <img src={wrong} alt="" />
+  <img src={wrong} alt="" style={{cursor:"pointer"}} onClick={()=>setPopup(false)}/>
    </div>
    
-    </div>
+    </div>}
+
     <div className='report row'>
       <div className="col-md-4 filters">
       <Filters updateIndustry={updateIndustry} updateCity={updateCity} updateCompetitors={updateCompetitors} updateMarket={updateMarket} updatePain={updatePain}
@@ -214,7 +223,7 @@ const Reports = () => {
       industry={industry} setIndustry={setIndustry} 
       setCity={setCity} competitors={competitors} setCompetitors={setCompetitors} market={market} setMarket={setMarket}
       painpoints={painpoints} setPainpoints={setPainpoints} handleClear={handleClear} select_city={select_city}
-      select_competitors={select_competitors} select_industry={select_industry} select_market={select_market} select_pain={select_pain} 
+      select_competitors={select_competitors} select_industry={select_industry} select_market={select_market} select_pain={select_pain} noSearch={noSearch} setNoSearch={setNoSearch}
       />
       </div>
       <div className="col-md-8">
@@ -245,7 +254,8 @@ const Reports = () => {
                     setMarket(false)
                     setPainpoints(false)
                   }}
-                  style={{cursor:"pointer"}}
+                  style={{cursor:"pointer",fontFamily: 'Baskerville Old Face'
+                }}
 
                   >
                     Industry&nbsp;&nbsp;&nbsp;
@@ -292,7 +302,7 @@ const Reports = () => {
                       )
                     })
                   }
-                  {select_industry.length>2&&<p className='text-primary'  style={{textAlign:"right",cursor:"pointer"}} onClick={()=>setExpandIndustry(!expandIndustry)}><u>+4 more</u></p>}
+                  {select_industry.length>2&&<p className='text-primary'  style={{textAlign:"left",cursor:"pointer"}} onClick={()=>setExpandIndustry(!expandIndustry)}><u>+{select_industry.length-2}more</u></p>}
 
                   </div>
                 </div>
@@ -308,7 +318,7 @@ const Reports = () => {
                     setIndustry(false)
                   }
                 }
-                style={{cursor:"pointer"}}>
+                style={{cursor:"pointer",fontFamily: 'Baskerville Old Face'}}>
                   City&nbsp;&nbsp;&nbsp;
                   {select_city.length?
                     <span className='text-primary'>({select_city.length})</span>:
@@ -349,10 +359,9 @@ const Reports = () => {
                     )
                   })
                 }
-                {select_city.length>2&&<p className='text-primary'  style={{textAlign:"right",cursor:"pointer"}} onClick={()=>setExpandCity(!expandCity)}><u>+4 more</u></p>}
+                {select_city.length>2&&<p className='text-primary'  style={{textAlign:"left",cursor:"pointer"}} onClick={()=>setExpandCity(!expandCity)}><u>+{select_city.length-2} more</u></p>}
                 </div>
               </div>
-
               <div className="one-filter">
               <div className="heading"     onClick={()=>
                 {setCompetitors(!competitors)
@@ -362,7 +371,7 @@ const Reports = () => {
                   setPainpoints(false)
                   setIndustry(false)
                 }}
-              style={{cursor:"pointer"}}>
+              style={{cursor:"pointer",fontFamily: 'Baskerville Old Face'}}>
                 List of Competitors&nbsp;&nbsp;&nbsp;
                 {select_competitors.length?
                   <span className='text-primary'>({select_competitors.length})</span>:
@@ -404,7 +413,7 @@ const Reports = () => {
                   )
                 })
               }
-              {select_competitors.length>2&&<p className='text-primary'  style={{textAlign:"right",cursor:"pointer"}} onClick={()=>setExpandCompetitors(!expandCompetitors)}><u>+4 more</u></p>}
+              {select_competitors.length>2&&<p className='text-primary'  style={{textAlign:"left",cursor:"pointer"}} onClick={()=>setExpandCompetitors(!expandCompetitors)}><u>+{select_competitors.length-2} more</u></p>}
               </div>
             </div>
                 
@@ -416,7 +425,7 @@ const Reports = () => {
               setCompetitors(false)
               setPainpoints(false)
               setIndustry(false)
-            }}            style={{cursor:"pointer"}}
+            }}            style={{cursor:"pointer",fontFamily: 'Baskerville Old Face'}}
             >
               Market Segment&nbsp;&nbsp;&nbsp;
               {select_market.length?
@@ -461,7 +470,7 @@ const Reports = () => {
             
             }
 
-            {select_market.length>2&&<p className='text-primary'  style={{textAlign:"right",cursor:"pointer"}} onClick={()=>setExpandMarket(!expandMarket)}><u>+4 more</u></p>}
+            {select_market.length>2&&<p className='text-primary'  style={{textAlign:"left",cursor:"pointer"}} onClick={()=>setExpandMarket(!expandMarket)}><u>+{select_market.length-2} more</u></p>}
             </div>
           </div>
                 
@@ -474,7 +483,7 @@ const Reports = () => {
             setMarket(false)
             setIndustry(false)
           }}
-                    style={{cursor:"pointer"}}
+                    style={{cursor:"pointer",fontFamily: 'Baskerville Old Face'}}
           >
             Pain Points&nbsp;&nbsp;&nbsp;
             {select_pain.length?
@@ -517,7 +526,7 @@ const Reports = () => {
               )
             })
           }
-          {select_pain.length>2&&<p className='text-primary'  style={{textAlign:"right",cursor:"pointer"}} onClick={()=>setExpandPain(!expandPain)}><u>+4 more</u></p>}
+          {select_pain.length>2&&<p className='text-primary'  style={{textAlign:"left",cursor:"pointer"}} onClick={()=>setExpandPain(!expandPain)}><u>+{select_pain.length-2} more</u></p>}
           </div>
         </div>
 
@@ -532,7 +541,7 @@ const Reports = () => {
         <div className="col-md-8 mt-4" style={{alignItems:"center"}}>
           {select_industry.length===0&&select_city.length===0&&select_market.length===0&&select_pain.length===0&&select_competitors.length===0? 
             <>
-            <button className='generate-btn' style={{background:" white",color:"black"}} >
+            <button className='generate-btn' style={{background:" white",color:"black"}} onClick={()=>setNoSearch(true)} >
             <div className='black-img'>
             <img src={black} alt="" />
             </div> 

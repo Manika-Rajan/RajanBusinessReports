@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Filters.css'
 import './Reports.css'
 import search from '../assets/search.svg'
+import close from '../assets/close.svg'
 const Filters = ({updateIndustry,updateMarket,updateCity,updateCompetitors,updatePain,country,setCountry,
-industry,setIndustry,setCity,city,competitors,setCompetitors,market,setMarket,painpoints,setPainpoints,handleClear,select_industry,select_city,select_market,select_competitors,select_pain
+industry,setIndustry,setCity,city,competitors,setCompetitors,market,setMarket,painpoints,setPainpoints,handleClear,select_industry,select_city,select_market,select_competitors,select_pain,noSearch,setNoSearch
 }) => {
-  
 const industry_data=[
 {name:'Agriculture &Allied Activities'},
 {name:'Construction'},
@@ -78,7 +78,14 @@ const pain_data=[
   {name:' Supply of Product not Adequate  '},
 
 ]
-
+const [industryList,setIndustryList]=useState(industry_data)
+const [industryField,setIndustryField]=useState("")
+const [cityList,setCityList]=useState(city_data)
+const [cityField,setCityField]=useState("")
+const [mainField,setMainField]=useState("")
+const [competitorList,setCompetitorList]=useState(competitors_data)
+const [marketList,setMarketList]=useState(market_data)
+const [painpointsList,setPainpointsList]=useState(pain_data)
 const handleIndustry=(e)=>{
    const {value,checked}=e.target
    updateIndustry(value,checked)    
@@ -101,22 +108,42 @@ const handlePain=(e)=>{
 
 }
 const handleIndustrySearch=(e)=>{
-  const searchField=e.targe.value;
-  const searchIndustry=industry.filter(
-    // item => {
-    //   return (
-    //     item
-    //     .name
-    //     .toLowerCase()
-    //     .includes(searchField.toLowerCase()) ||
-    //     person
-    //     .email
-    //     .toLowerCase()
-    //     .includes(searchField.toLowerCase())
-    //   );
-    // }
+  const searchField=e.target.value;
+  setIndustryField(searchField)
+  console.log(searchField)
+  const searchIndustry=industry_data.filter(
+    item => {
+      return (
+        item
+        .name
+        .toLowerCase()
+        .includes(searchField.toLowerCase()) 
+      );
+    }
   );
+  setIndustryList(searchIndustry)
+}
+const handleCitySearch=(e)=>{
+  const searchField=e.target.value;
+  setCityField(searchField)
+  console.log(searchField)
+  const searchCity=city_data.filter(
+    item => {
+      return (
+        item
+        .name
+        .toLowerCase()
+        .includes(searchField.toLowerCase()) 
+      );
+    }
+  );
+  setCityList(searchCity)
+}
 
+const handleMainSearch=(e)=>{
+  const serchField=e.target.value
+  setMainField(serchField)
+  
 }
 
   return (
@@ -131,6 +158,23 @@ const handleIndustrySearch=(e)=>{
         </div>
         </div>
       </div>
+     { 
+      noSearch&&
+      <div className="accordion2">
+      <div className="accordion-item2">
+      <div className='row' style={{display:"flex",margin:"5px 32px",padding:"10px 16px", border:"1px solid #0263c7",borderRadius:"10px"}}>
+        <div className='col-md-11'>
+        <p className='search-desc'>No matches found.<br/>Please select options from the <strong>"Filters Panel"</strong> we have specially crafted for you.</p>
+        </div>
+        <div className='col-md-1'>
+        <img src={close} alt=""style={{color:"black",cursor:"pointer"}} onClick={()=>setNoSearch(false)}/>
+        </div>
+      </div>
+      </div>
+    </div>
+  }
+
+
 
        <div className="accordion2">
         <div className="accordion-item2">
@@ -193,16 +237,16 @@ const handleIndustrySearch=(e)=>{
             }}
             >{industry?<>-</>:<>+</>}</div>
           </div>
-          {industry&&          <div className="accordion-content1">
+          {industry&&<div className="accordion-content1">
           <form>
           <div style={{display:"flex"}}>
-          <input type='text' placeholder='Search'className='search-input' onChange={handleIndustrySearch}/>
+          <input type='text'  value={industryField}placeholder='Search'className='search-input' onChange={handleIndustrySearch} name="industryField" />
           <img src={search} style={{marginLeft:"-6%",marginBottom:"5%"}}></img>
           </div>
           
           <br/>
           {
-            industry_data&&industry_data.map((ind,key)=>{
+            industryList&&industryList.map((ind,key)=>{
               return(
                  <>
                  <div class="form-check">
@@ -240,9 +284,12 @@ const handleIndustrySearch=(e)=>{
     </div>
         {city&&          <div className="accordion-content1">
         <form>
-      
+          <div style={{display:"flex"}}>
+          <input type='text'  value={cityField}placeholder='Search'className='search-input' onChange={handleCitySearch} name="cityField" />
+          <img src={search} style={{marginLeft:"-6%",marginBottom:"5%"}}></img>
+          </div>
         {
-          city_data&&city_data.map((ind)=>{
+          cityList&&cityList.map((ind)=>{
             return(
                <>
                <div class="form-check">
@@ -280,7 +327,7 @@ const handleIndustrySearch=(e)=>{
           <form>
       
           {
-            competitors_data&&competitors_data.map((ind)=>{
+            competitorList&&competitorList.map((ind)=>{
               return(
                  <>
                  <div class="form-check">
@@ -318,7 +365,7 @@ const handleIndustrySearch=(e)=>{
           <form>
       
           {
-            market_data&&market_data.map((ind)=>{
+            marketList&&marketList.map((ind)=>{
               return(
                  <>
                  <div class="form-check">
@@ -357,7 +404,7 @@ const handleIndustrySearch=(e)=>{
           <form>
       
           {
-            pain_data&&pain_data.map((ind)=>{
+            painpointsList&&painpointsList.map((ind)=>{
               return(
                  <>
                  <div class="form-check">

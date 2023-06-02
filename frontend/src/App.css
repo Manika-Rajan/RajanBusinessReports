@@ -6,7 +6,6 @@ body
   background-color:transparent;
 }
 .header{
-  width: 100%;
   background-color: #fff;
 }
 .nav-left{
@@ -35,14 +34,8 @@ body
   text-align: left;
   color: #000;
 }
-.navbar-collapse ul{
-  justify-content: space-around;
-}
-.navbar-collapse ul li{
-  width: 60px;
-  height: 26px;
 
-}
+
 .navbar-collapse ul li a{
   font-size: 19px;
   font-weight: normal;
@@ -94,11 +87,6 @@ body
 .nav-popup p{
   text-align: center;
 }
-.nav-popup  .fa{
-  text-align: right;
-  justify-content: end;
-}
-
 
 
 

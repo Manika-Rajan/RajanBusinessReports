@@ -86,3 +86,10 @@ color: #293750;
     padding: 3px 10px;
     margin: 2px;
   }
+  .search-desc{
+    font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 19px;
+letter-spacing: 0.03em;
+  }
