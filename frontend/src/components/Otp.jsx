@@ -1,10 +1,11 @@
 import React from 'react'
 import './Login.css'
 import './Login'
-const Otp = ({setVerify,setOtp,setLogin}) => {
+
+const Otp = ({setVerify,sendOtp,setLogin}) => {
 
   const EmailVerify=()=>{
-    setOtp(false)
+    sendOtp(false)
     setLogin(false)
     setVerify(true)
   }

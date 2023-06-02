@@ -1,9 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {Amplify} from 'aws-amplify';
+import config from '../aws-exports-userpool2';
+import { Auth } from 'aws-amplify';
+
+Amplify.configure(config);
 
 const EmailVerify = () => {
-  const verifyMail=()=>{
+  const password= Math.random().toString(6)+'Abc#';
+  const [email,setEmail]=useState('')
+  const verifyMail= async()=>{
     
-  }
+      try {
+        await Auth.signUp({
+          username: email,
+          password: password,
+          attributes: {
+            email: email,
+          },
+        }).then(()=>signIn());
+        console.log('User registered successfully');
+        
+      }
+       catch (error) {
+        console.log('Error registering user:', error);
+        // Handle registration error
+      }
+    };
+    const signIn = async () => {
+      try {
+        await Auth.signIn(email, password);
+        console.log('Verification email sent');
+        // Perform any desired actions upon successful email verification
+      } catch (error) {
+        console.log('Error sending verification email:', error);
+        // Handle email verification error
+      }
+    };
+    
+  
   return (
     <div>
     <div style={{textAlign:"center",height:"50vh",margin:"auto",marginTop:"5%"}}>
@@ -26,6 +60,6 @@ const EmailVerify = () => {
   </div>
     </div>
   )
-}
 
+  }
 export default EmailVerify
