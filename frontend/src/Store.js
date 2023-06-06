@@ -4,11 +4,12 @@ import { createContext, useReducer } from "react";
 export const Store=createContext();
 
 const initialState={
-    isLogin:true,
+    isLogin:false,
     name:'',
-    phone:'+916309019170',
+    number:'',
     email:'',
-    totalPrice:0,    
+    totalPrice:0,  
+    password:Math.random().toString(6) + 'Abc#'
 }
 
 

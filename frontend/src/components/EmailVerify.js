@@ -1,43 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Amplify} from 'aws-amplify';
-import config from '../aws-exports-userpool2';
+import './Login.css';
 import { Auth } from 'aws-amplify';
 
-Amplify.configure(config);
+import UserPoolEmail from './UserPoolEmail';
+//Amplify.configure(config);
 
-const EmailVerify = () => {
+const EmailVerify = ({setVerify,sendOtp,setLogin}) => {
+  const [email, setEmail]=useState('');
   const password= Math.random().toString(6)+'Abc#';
-  const [email,setEmail]=useState('')
-  const verifyMail= async()=>{
+  useEffect(() => {
     
-      try {
-        await Auth.signUp({
-          username: email,
-          password: password,
-          attributes: {
-            email: email,
-          },
-        }).then(()=>signIn());
-        console.log('User registered successfully');
-        
-      }
-       catch (error) {
-        console.log('Error registering user:', error);
-        // Handle registration error
-      }
-    };
-    const signIn = async () => {
-      try {
-        await Auth.signIn(email, password);
-        console.log('Verification email sent');
-        // Perform any desired actions upon successful email verification
-      } catch (error) {
-        console.log('Error sending verification email:', error);
-        // Handle email verification error
-      }
-    };
+  }, []);
     
-  
+    const Signup = (event)=>{
+      console.log(email)
+      console.log(password)
+    
+      //const onSubmit=(event)=>{
+        event.preventDefault();
+        UserPoolEmail.signUp(email, password,[], null, (err,data)=>{
+          if(err){
+            console.error(err);
+          }
+          console.log(data);
+          setLogin(false)
+          sendOtp(false)
+          setVerify(false)
+          
+        })
+    
+      };
   return (
     <div>
     <div style={{textAlign:"center",height:"50vh",margin:"auto",marginTop:"5%"}}>
@@ -49,11 +42,11 @@ const EmailVerify = () => {
   </div>
   <div className='login-phone-input' style={{width:"70%",textAlign:"center",margin:"auto"}}>
    <div class="input-group mb-2">
-   <input type="email" class="form-control" placeholder="Enter Your email id here" style={{textAlign:"center"}}/>
+   <input type="email"  class="form-control" placeholder="Enter Your email id here" value={email} style={{textAlign:"center"}} onChange={(event)=>setEmail(event.target.value)}/>
  </div>
    </div>
    <div className='mb-4' style={{marginTop:"35px"}}>
-   <button onclick={verifyMail} className='login-button'
+   <button onClick={Signup} className='login-button'
    >Verify</button>
    </div>
    <i>Note:This is a onetime verification.The report will be delivered to this email.</i>
