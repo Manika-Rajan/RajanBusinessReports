@@ -4,12 +4,20 @@ import { createContext, useReducer } from "react";
 export const Store=createContext();
 
 const initialState={
+
     isLogin:false,
     name:'',
-    number:'',
+    phone:'',
     email:'',
     totalPrice:0,  
-    password:Math.random().toString(6) + 'Abc#'
+
+    isLogin:true,
+    name:'Jahnavi',
+    phone:'+916309019170',
+    email:'jahnavipothala15@gmail.com',
+    totalPrice:0,   
+    status:true, 
+
 }
 
 
@@ -25,7 +33,11 @@ const reducer=(state,action)=>{
                 return  {...state,phone:action.payload}
         case 'SET_EMAIL':
                 return  {...state,email:action.payload}
+        case 'SET_REPORT_STATUS':
+                    return  {...state,status:!(state.status)}
+           
        
+        
         default:
             return state
     }
