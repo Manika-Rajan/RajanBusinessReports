@@ -41,7 +41,7 @@ const Reports = () => {
 
   const [popup,setPopup]=useState(true)
   const [noSearch,setNoSearch]=useState(false)
-
+  const[nogenerate,setNoGenerate]=useState(false)
  const [price,setPrice]=useState(0)
 
   const updateIndustry=(value,checked)=>{
@@ -223,7 +223,7 @@ const Reports = () => {
       industry={industry} setIndustry={setIndustry} 
       setCity={setCity} competitors={competitors} setCompetitors={setCompetitors} market={market} setMarket={setMarket}
       painpoints={painpoints} setPainpoints={setPainpoints} handleClear={handleClear} select_city={select_city}
-      select_competitors={select_competitors} select_industry={select_industry} select_market={select_market} select_pain={select_pain} noSearch={noSearch} setNoSearch={setNoSearch}
+      select_competitors={select_competitors} select_industry={select_industry} select_market={select_market} select_pain={select_pain} noSearch={noSearch} setNoSearch={setNoSearch} nogenerate={nogenerate} setNoGenerate={setNoGenerate}
       />
       </div>
       <div className="col-md-8">
@@ -541,7 +541,7 @@ const Reports = () => {
         <div className="col-md-8 mt-4" style={{alignItems:"center"}}>
           {select_industry.length===0&&select_city.length===0&&select_market.length===0&&select_pain.length===0&&select_competitors.length===0? 
             <>
-            <button className='generate-btn' style={{background:" white",color:"black"}} onClick={()=>setNoSearch(true)} >
+            <button className='generate-btn' style={{background:" white",color:"black"}} onClick={()=>setNoGenerate(true)} >
             <div className='black-img'>
             <img src={black} alt="" />
             </div> 

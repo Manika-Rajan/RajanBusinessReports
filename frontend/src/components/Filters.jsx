@@ -4,7 +4,7 @@ import './Reports.css'
 import search from '../assets/search.svg'
 import close from '../assets/close.svg'
 const Filters = ({updateIndustry,updateMarket,updateCity,updateCompetitors,updatePain,country,setCountry,
-industry,setIndustry,setCity,city,competitors,setCompetitors,market,setMarket,painpoints,setPainpoints,handleClear,select_industry,select_city,select_market,select_competitors,select_pain,noSearch,setNoSearch
+industry,setIndustry,setCity,city,competitors,setCompetitors,market,setMarket,painpoints,setPainpoints,handleClear,select_industry,select_city,select_market,select_competitors,select_pain,noSearch,setNoSearch,nogenerate,setNoGenerate
 }) => {
 const industry_data=[
 {name:'Agriculture &Allied Activities'},
@@ -158,6 +158,20 @@ const handleMainSearch=(e)=>{
         </div>
         </div>
       </div>
+      {nogenerate&&
+        <div className="accordion2">
+        <div className="accordion-item2">
+        <div className='row' style={{display:"flex",margin:"5px 32px",padding:"10px 16px", border:"1px solid #0263c7",borderRadius:"10px"}}>
+          <div className='col-md-11'>
+          <p className='search-desc'>Please select options from the <strong>"Filters Panel"</strong> we have specially crafted for you.</p>
+          </div>
+          <div className='col-md-1'>
+          <img src={close} alt=""style={{color:"black",cursor:"pointer"}} onClick={()=>setNoGenerate(false)}/>
+          </div>
+        </div>
+        </div>
+      </div>
+        }
      { 
       noSearch&&
       <div className="accordion2">
