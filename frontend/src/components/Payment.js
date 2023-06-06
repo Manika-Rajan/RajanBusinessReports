@@ -9,9 +9,10 @@ import Delivery from '../assets/Delivery.svg'
 import pencil from '../assets/pencil.svg'
 import green from '../assets/green-tick.svg'
 import { Store } from '../Store'
-//import { useNavigate } from 'react-router-dom'
+
+import { useNavigate } from 'react-router-dom'
 const Payment = () => {
-    //const navigate=useNavigate()
+    const navigate=useNavigate()
     const {state,dispatch:cxtDispatch}=useContext(Store)
     const {totalPrice,name,phone,email}=state
     const [editName,setEditName]=useState(false)
@@ -22,6 +23,7 @@ const Payment = () => {
     const [success,setSuccess]=useState(false)
     const [error,setError]=useState(false)
     const [verify,setVerify]=useState(false)
+
 
     const handleName=(e)=>{
       if (e.key === 'Enter') {
@@ -97,6 +99,7 @@ const Payment = () => {
         },
         data: bodyData,
       }).then((res) => {
+       
         return res;
       });
   
@@ -116,6 +119,7 @@ const Payment = () => {
           // we will handle success by calling handlePaymentSuccess method and
           // will pass the response that we've got from razorpay
           handlePaymentSuccess(response);
+         
         },
         prefill: {
           name: "User's name",
@@ -138,6 +142,7 @@ const Payment = () => {
       
     };
   return (
+    <>
     <div>
     <Navbar reports/>
      <div className='payments-page row mt-4'>
@@ -226,7 +231,10 @@ const Payment = () => {
 
       </div>
      </div>
+
     </div>
+   
+   </>
   )
 }
 

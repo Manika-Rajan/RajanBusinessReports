@@ -128,3 +128,26 @@ color: #E70000;
   border-bottom: 1px solid #0263c7;
   outline: none;
 }
+.success-email{
+  font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 33px;
+/* identical to box height */
+
+letter-spacing: 0.03em;
+
+color: #0263C7;
+
+}
+.success-head{
+  font-family: 'Baskerville Old Face';
+font-style: normal;
+font-weight: 400;
+font-size: 32px;
+line-height: 32px;
+
+letter-spacing: 0.01em;
+
+color: #293750;
+}

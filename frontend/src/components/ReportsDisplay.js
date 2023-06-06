@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext,useState } from 'react'
 import logo from '../assets/logo.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import './ReportDisplay.css'
@@ -7,14 +7,42 @@ import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-
+import Login from './Login'
+import Otp from './Otp'
+import EmailVerify from './EmailVerify'
 import pdfFile from '../assets/sample1.pdf'
+import { Store } from '../Store';
+import {Modal,ModalBody} from "reactstrap"
+
 const ReportsDisplay = () => {
+
   const navigate=useNavigate()
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
+  const {state,dispatch:cxtDispatch}=useContext(Store)
+  const {isLogin,name,status,email}=state
+  const [openModel,setOpenModel]=useState(false)
+  const [login,setLogin]=useState(true)
+  const [otp,sendOtp]=useState(false)
+  const [verify,setVerify]=useState(false)
+
+  const handlePayment=()=>{
+    if(isLogin)
+    {
+      navigate("/payment")
+    }
+    else{
+      setOpenModel(true)
+        setLogin(true)
+    }
+  }
+  const changeStatus=()=>{
+    setOpenModel(false)
+    cxtDispatch({type:'SET_REPORT_STATUS'})
+  }
   return (
+    <>
     <div className='report-display'>
-    <nav className="navbar navbar-expand-lg bg-light" style={{marginLeft:"35px"}}>
+    <nav className="navbar navbar-expand-lg bg-light" style={{marginLeft:"35px",paddingTop:"3%"}}>
     <div className="container-fluid">
       <div className="nav-left">
        <div className="logo">
@@ -23,7 +51,7 @@ const ReportsDisplay = () => {
        </Link>
        </div>
        <div className="text">
-          <p className='nav-title report-display-title'>Confectionary for Toodlers & Teens</p>
+          <p className='nav-title report-display-title'>Paper Industry In India</p>
           <p className='report-display-desc' style={{marginTop:"-10px"}}>Candy production is a seasonal business,with the majority of those involved  in market normally <br/>doubling their staffs during the winter months</p>
        </div>
       </div>
@@ -34,7 +62,7 @@ const ReportsDisplay = () => {
         <ul className="navbar-nav">
         
           <li className="nav-item" style={{marginLeft:"113%"}}>
-          <button className="nav-link buy-btn" onClick={()=>navigate("/payment")}
+          <button className="nav-link buy-btn" onClick={handlePayment}
            >BUY NOW</button>
           </li>
         </ul>
@@ -49,36 +77,35 @@ const ReportsDisplay = () => {
 </Worker>
   </div>
     </div>
+    <Modal
+    
+    isOpen={openModel}
+    toggle={()=>setOpenModel(!openModel)}
+    size="lg" style={{maxWidth: '650px', width: '100%',marginTop:"15%"}}>
+
+    <ModalBody>
+    {
+      login&&<Login sendOtp={sendOtp}  setVerify={setVerify} setLogin={setLogin}/>
+    }
+    {
+      otp&&<Otp sendOtp={sendOtp}  setVerify={setVerify} setLogin={setVerify}/>
+    }
+    {
+      verify&&<EmailVerify sendOtp={sendOtp}  setLogin={setLogin}/>
+    }
+    {
+      status&&<div className='' style={{textAlign:"center"}}>
+      <p className='success-head'>The Report has been successfully sent to</p>
+      <p className='success-email'>{email}</p>
+      <button className='btn btn-primary' onClick={changeStatus}>Ok</button>
+      </div>
+    }
+    </ModalBody>
+    </Modal>
+    </>
   )
 }
 
 export default ReportsDisplay
 
 
-
-// <nav class="navbar navbar-expand-lg bg-light">
-// <div class="container-fluid">
-   
-// <div className="nav-left ">
-//   <div className="logo">
-// <a className="navbar-brand" href="#">
-// <img src={logo} alt="" style={{width:"60px",height:"60px"}} />
-// </a>
-//   </div>
-//   <div className="reports-text" style={{width:"70%"}}>
-//      <p className='report-display-title'>Confectionary for Toodlers & Teens</p>
-//     <p className='report-display-desc' style={{marginTop:"-10px"}}>Candy production is a seasonal business,with the majority of those involved  in market normally <br/>doubling their staffs during the winter months</p>
-//    </div>
-//   </div>
-//   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-//     <span class="navbar-toggler-icon"></span>
-//   </button>
-//   <div class="collapse navbar-collapse" id="navbarNav">
-//     <ul class="navbar-nav">
-//      <li style={{width:"100%"}}><button className="nav-link buy-btn" onClick={()=>navigate("/payment")}
-//      >BUY NOW</button></li>
-      
-//     </ul>
-//   </div>
-// </div>
-// </nav>
