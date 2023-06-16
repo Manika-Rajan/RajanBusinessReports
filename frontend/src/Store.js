@@ -9,7 +9,7 @@ const initialState={
     phone:'+916309019170',
     email:'jahnavipothala15@gmail.com',
     totalPrice:0,   
-    status:true, 
+    status:false, 
 }
 
 

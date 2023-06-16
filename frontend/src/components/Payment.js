@@ -9,12 +9,13 @@ import Delivery from '../assets/Delivery.svg'
 import pencil from '../assets/pencil.svg'
 import green from '../assets/green-tick.svg'
 import { Store } from '../Store'
+import logo from '../assets/logo.svg'
 
 import { useNavigate } from 'react-router-dom'
 const Payment = () => {
     const navigate=useNavigate()
     const {state,dispatch:cxtDispatch}=useContext(Store)
-    const {totalPrice,name,phone,email}=state
+    const {totalPrice,name,phone,email,status}=state
     const [editName,setEditName]=useState(false)
     const [editEmail,setEditEmail]=useState(false)
     const [inputName,setInputname]=useState('')
@@ -113,18 +114,20 @@ const Payment = () => {
         currency: "INR",
         name: "Rajan Business Ideas Pvt. Ltd",
         description: "Test transaction",
-        image: "", // add image url
+        image: {logo}, // add image url
         order_id: data.data.payment.id,
         handler: function (response) {
           // we will handle success by calling handlePaymentSuccess method and
           // will pass the response that we've got from razorpay
           handlePaymentSuccess(response);
-         
+          
+        
+
         },
         prefill: {
-          name: "User's name",
-          email: "User's email",
-          contact: "User's phone",
+          name: "",
+          email: "",
+          contact: "",
         },
         notes: {
           address: "Razorpay Corporate Office",
