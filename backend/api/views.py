@@ -8,13 +8,7 @@ from rest_framework.response import Response
 from .models import Order
 from .serializers import OrderSerializer
 
-class IndexView(generic.ListView):
-    template_name = 'api/index.html'
-    context_object_name = 'todo_list'
-
-    def get_queryset(self):
-        """Return all the latest todos."""
-        return Todo.objects.order_by('-created_at')
+template_name = 'api/index.html'
 
 env = environ.Env()
 
