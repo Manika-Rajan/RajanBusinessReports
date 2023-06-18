@@ -4,7 +4,7 @@ import UserPool from './UserPool';
 import {Amplify} from 'aws-amplify';
 import Auth from '@aws-amplify/auth';
 
-import awsconfig from 'aws-exports.js';
+import awsconfig from '../aws-exports.js';
 Amplify.configure(awsconfig);
 
 //const NOTSIGNIN="You are not logged in";
