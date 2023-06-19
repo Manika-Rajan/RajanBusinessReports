@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fy#o=^#vr)d+d6p87l%*i%zup5=5ctv8e4l9z#6sswm5xp=wxi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['3.110.196.8','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ORIGIN_WHITELIST = [
@@ -135,3 +135,5 @@ os.path.join(BASE_DIR,'frontend/build/static'),
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
